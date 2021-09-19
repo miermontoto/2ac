@@ -25,7 +25,7 @@ def process(n):
     x = os.path.splitext(n)[0]
     if not os.path.splitext(n)[1] == ".c":
         warning("badext")
-    print(Fore.LIGHTMAGENTA_EX + tag + Fore.BLUE + 
+    print(Fore.LIGHTMAGENTA_EX + tag + Fore.LIGHTBLUE_EX + 
         "target file: " + Style.RESET_ALL + x)
 
     os.system("gcc -c " + x + ".c")
