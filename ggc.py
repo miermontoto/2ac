@@ -20,11 +20,14 @@ def help():
     print(tag + Fore.LIGHTYELLOW_EX + "flags:   " + reset + "-w: activate -Wall flag (warnings)")
     print(tag + Fore.LIGHTYELLOW_EX + "\t\t" + reset + "-o: deactivate automatic removal of *.o files.")
     print(tag + Fore.LIGHTYELLOW_EX + "\t\t" + reset + "-v: verify that a executable script exists after finishing.")
+    print(tag + Fore.LIGHTYELLOW_EX + "\t\t" + reset + "-e: enable library mode to append more than one .o file into one executable.")
+    print(tag + Fore.LIGHTYELLOW_EX + "\t\t" + reset + "-m: enable -lm tag.")
+    print(tag + Fore.LIGHTYELLOW_EX + "\t\t" + reset + "-n: disable -O3 optimization.")
     print(tag + Fore.LIGHTYELLOW_EX + "\t\t" + reset + "-h: display this help message.")
 
 
 def redirect(x, i): # flag detection in parameters
-    global alert, cleanup, verify, libraries, math
+    global alert, cleanup, verify, libraries, math, noOptimization
     if len(x) == 2: # only read flags if they are one character long.
 
         readFlag = False
@@ -34,6 +37,7 @@ def redirect(x, i): # flag detection in parameters
         elif(x == "-e"): libraries = True ; readFlag = True
         elif(x == "-m"): math = True ; readFlag = True
         elif(x == "-h"): readFlag = True
+        elif(x == "-n"): noOptimization = True ; readFlag = True
 
         # print read flag on terminal.
         if readFlag: print(tag + reset + "read '" + x + "' flag.")
@@ -41,7 +45,7 @@ def redirect(x, i): # flag detection in parameters
     else: help() ; exit()
 
 def process(n): # general script tasks
-    global alert, verify, cleanup, tag, libraries, math
+    global alert, verify, cleanup, tag, libraries, math, noOptimization
     x = path.splitext(n)[0] # separates file's name from ext
     if not path.splitext(n)[1] == ".c":
         warning("badext") # only works with files with '.c' ext
@@ -51,6 +55,7 @@ def process(n): # general script tasks
     ex = "gcc -c "
     if math: ex += "-lm "
     if alert: ex += "-Wall "
+    if not noOptimization: ex += "-O3 "
     ex += x + ".c"
     system(ex)
     if libraries is False:
@@ -71,6 +76,7 @@ cleanup = True # by default, the *.o file is deleted
 alert = False # by default, the -Wall flag is disabled
 libraries = False # by default, library mode is disabled
 math = False # by default, -lm is disabled
+noOptimization = False # by default, -O3 is enabled
 tag = Fore.LIGHTMAGENTA_EX + "ggc.py "
 
 print(tag + reset +
