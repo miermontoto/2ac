@@ -1,0 +1,11 @@
+# Rule to build the main program
+1-2thread : 1-2thread.o
+	gcc 1-2thread.o -O3 -o 1-2thread -lrt -lm -lpthread
+
+# Sources compilation
+ : bench_fp_mt.c
+	gcc -c bench_fp_mt.c
+
+# Clean
+clean :
+	rm -f bench_fp_mt.o
