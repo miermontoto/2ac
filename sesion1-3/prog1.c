@@ -74,7 +74,7 @@ int contarPrimosComunes(int vector1[], int tamVector1, int vector2[], int tamVec
   int i;
 
   for (i = 0; i < tamVector1; i++)
-  { 
+  {
     if (estaEnVector(vector1[i], vector2, tamVector2) && esPrimo(vector1[i]))
     {
       numPrimosComunes++;
