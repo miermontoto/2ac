@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <math.h>
 #include <pthread.h>
 
@@ -9,7 +9,7 @@
 // Start measuring time
 // TODO: Write down your DNI without the final letter
 //////////////////////////////////////////////////////////////////////////////////
-const unsigned int DNI = *** GAP 1 ***; // Example: const unsigned int DNI = 12345678 
+const unsigned int DNI = 71777658; // Example: const unsigned int DNI = 12345678
 
 const unsigned long NELEMENTS = 55440; // Number of elements to be processed by a task
 
@@ -25,7 +25,7 @@ typedef struct
 double *data[MAX_NTASKS_NTHREADS] ;
 
 // Thread function arguments
-threadArgs_t threadArgs[MAX_NTASKS_NTHREADS]; 
+threadArgs_t threadArgs[MAX_NTASKS_NTHREADS];
 
 int task(unsigned int taskIndex, unsigned int nTaskThreads, pthread_t threadIDs[]);
 double mcos(double val);
@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 {
 	struct timespec t1, t2;
 	double t12;
-	
+
 	// Get program arguments
 	if (argc != 3)
 	{
@@ -70,9 +70,9 @@ int main(int argc, char* argv[])
 	if (nTasks > 1 && nThreads != nTasks)
 	{
 		fprintf(stderr, "ERROR: thread count should be equal to task count for task count > 1\n");
-		exit(EXIT_FAILURE);		
+		exit(EXIT_FAILURE);
 	}
-		
+
 	if (nTasks == 1 && nThreads == 1)		
 		printf("Running 1 monolitic task...\n");
 	else if (nTasks == 1 && nThreads > 1)
@@ -87,7 +87,7 @@ int main(int argc, char* argv[])
 	// Start measuring time
 	// TODO: Write here the appropiate instructions to start time measurement
 	//////////////////////////////////////////////////////////////////////////////////
-	*** GAP 2 ***
+	clock_gettime(CLOCK_REALTIME, &t1);
 
 	// Start all the tasks
 	for (unsigned int taskIndex = 0; taskIndex < nTasks; taskIndex++)
@@ -99,7 +99,6 @@ int main(int argc, char* argv[])
 			exit(EXIT_FAILURE);
 		}
 	}
-	
 	// Wait for the threads of all the tasks to finish
 	for (unsigned int threadIndex = 0; threadIndex < nThreads; threadIndex++)
 		pthread_join(threadIDs[threadIndex], NULL);
@@ -113,18 +112,17 @@ int main(int argc, char* argv[])
 	// Finish measuring time
 	// TODO: Write here the appropiate instructions to finish time measurement
 	//////////////////////////////////////////////////////////////////////////////////
-	*** GAP 3 ***
-	
+	clock_gettime(CLOCK_REALTIME, &t2);
+
 	printf("Execution finished\n");
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// Show the elapsed time
 	// TODO: Write here the appropiate instructions to calculate the elapsed time
 	//////////////////////////////////////////////////////////////////////////////////
-	*** GAP 4 ***
-		    
+	t12 = (t2.tv_sec - t1.tv_sec);
+	t12 += (t2.tv_nsec - t1.tv_nsec) / 1e+9;
 	printf("Elapsed time    : %f s.\n", t12);
-	
 	return 0;
 }
 
@@ -204,14 +202,7 @@ int task(unsigned int taskIndex, unsigned int nTaskThreads, pthread_t threadIDs[
 
 double mcos(double val)
 {
-	double a = 0.0;
-	for (int i = 0; i < 50; i++)
-		a += cos(val);
-	return a;
-	
-	// Replace previous code by
-	// 		return 50*cos(val);
-	// for the function optimization
+	return 50*cos(val);
 }
 
 double msin(double val)
