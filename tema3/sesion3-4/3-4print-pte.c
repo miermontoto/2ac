@@ -26,11 +26,10 @@ void print_virtual_physical_pte(void *virtual_addr, char *title)
 	if ((pte & 0x00000001) == 1)
 	{
 		// Store the flags associated to the memory page
-		flags_vp = <<Complete 1>>
+		flags_vp = pte & 0xFFF;
 
 		// Calculate the memory physical address
-		physical_addr = <<Complete 2>>
-		
+		physical_addr = pte & 0xFFFFF000;
 		// Print address info
 		printf("Virtual address: \t%.8Xh\n"
 		       "Page Table Entry:\t%.8Xh\n"
