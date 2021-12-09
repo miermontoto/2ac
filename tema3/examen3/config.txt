@@ -1,0 +1,8 @@
+Tamaño de la palabra de memoria = 8 bits
+Número de bits de direcciones de memoria = 12
+Caché unificada (un solo nivel)
+Número de bloques de caché = 16
+Número de palabras por bloque = 4
+Correspondencia asociativa por conjuntos de 8 vías
+Algoritmo de reemplazo LRU
+Algoritmo de escritura write-back
