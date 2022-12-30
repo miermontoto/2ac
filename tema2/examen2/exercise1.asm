@@ -1,8 +1,8 @@
 .data
-	exp:	dword 2		; exponent 
+	exp:	dword 2		; exponent
 	op:		dword 2		; operand
 	res:	dword 0		; res = operand^exponent
-	tmp:	dword 1		; tmp = 1 
+	tmp:	dword 1		; tmp = 1
 .code
 main:
 	ld		r3, tmp(r0)	; temporary pow (1 is the default value)
@@ -15,4 +15,4 @@ loop:
 	beqz 	r4, end		; end of the multiplication
 	j loop
 end:
-	sd		r3, res(r0)	; result of the operation 
+	sd		r3, res(r0)	; result of the operation

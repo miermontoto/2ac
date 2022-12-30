@@ -9,4 +9,3 @@ int main()
 	memcpy(varData, &value, sizeof(int) );
 	printf("P: %ld\n", (long) varData);
 }
-

@@ -12,7 +12,7 @@ main:
 loop:
 	xor		r6, r6, r6		; r6 <- 0
 	ori		r2, r2, 2		; r2 <- 0
-	daddi  	r5, r5, -3 		; r5 <- r5 - 3 
+	daddi  	r5, r5, -3 		; r5 <- r5 - 3
 	beqz	r5, end			; checks if r5 is equals 0, and if so jumps to end label
 	j		loop
 end:
